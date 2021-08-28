@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  strategy: 
+    type: Recreate
+  template:
+    spec:
+      serviceAccountName: jenkins
+      volumes:
+      - name: configuration-as-code
+        configMap:
+          name: configuration-as-code
+      containers:
+      - name: jenkins
+        image: jenkins-local
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: configuration-as-code
+          mountPath: /var/jenkins_home/casc_configs/
+        env:
+        - name: JAVA_OPTS
+          value: > 
+            -Xms1g
+            -Xmx1g
+            -XX:+UseG1GC
+            -XX:+DisableExplicitGC
+            -XX:+ParallelRefProcEnabled
+            -XX:+UseStringDeduplication
+            -XX:+UnlockExperimentalVMOptions
+            -XX:+UnlockDiagnosticVMOptions
+            -XX:G1NewSizePercent=20
+            -XX:G1SummarizeRSetStatsPeriod=1
+            -XX:+AlwaysPreTouch
+        - name: CASC_JENKINS_CONFIG 
+          value: /var/jenkins_home/casc_configs/JCasC.yaml
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: '1'
+          limits:
+            memory: "2Gi"
+            cpu: '1'

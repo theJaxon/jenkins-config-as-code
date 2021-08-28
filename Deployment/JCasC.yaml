@@ -1,0 +1,47 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsUrl: "http://jenkins:8080"
+      name: "kubernetes"
+      serverUrl: "https://192.168.100.10:6443"
+      skipTlsVerify: true
+      templates:
+      - containers:
+        - args: "9999999"
+          command: "sleep"
+          image: "jenkinsci/jnlp-slave"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          workingDir: "/home/jenkins/agent"
+        id: "b99cc801-be4b-4f17-84e4-e97097cd99b4"
+        label: "k8s"
+        name: "jnlp"
+        namespace: "jenkins"
+        nodeUsageMode: NORMAL
+        yamlMergeStrategy: "override"
+      webSocket: true
+unclassified:
+  giteaServers:
+    servers:
+    - displayName: "gitea"
+      manageHooks: false
+      serverUrl: "http://gitea-http.gitea:3000"
