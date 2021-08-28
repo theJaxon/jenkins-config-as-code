@@ -36,10 +36,10 @@ docker build -t jenkins-local .
 
 #### Integration with Kubernetes 
 - The current cluster setup is the same as [`Kontainterd project setup`](https://github.com/theJaxon/Kontainerd)
-- To give Jenkins access to Spin up pods in any namespace there's a service account created, this SA gets tied to the cluster role `cluster-admin`
-- All this is handled via `kustomization.yaml`
-- Kustomize generates a configMap from `JCasC.yaml` file then the file gets mounted at `/var/jenkins_home/casc_configs/JCasC.yaml`
-- Configuration as code file is loaded via the environment variable `CASC_JENKINS_CONFIG`
+- To give Jenkins access to Spin up pods in any namespace there's a [service account](https://github.com/theJaxon/jcasc/blob/main/Deployment/service-account.yaml) created, this SA gets tied to the cluster role [`cluster-admin`](https://github.com/theJaxon/jcasc/blob/main/Deployment/cluster-role-binding.yaml)
+- All this is handled via [`kustomization.yaml`](https://github.com/theJaxon/jcasc/blob/main/Deployment/kustomization.yaml)
+- Kustomize [generates a configMap](https://github.com/theJaxon/jcasc/blob/main/Deployment/kustomization.yaml#L20) from `JCasC.yaml` file then the file gets mounted at `/var/jenkins_home/casc_configs/JCasC.yaml`
+- Configuration as code file is loaded via the environment variable [`CASC_JENKINS_CONFIG`](https://github.com/theJaxon/jcasc/blob/main/Deployment/deployment.yaml#L36)
 - Deployment strategy is `recreate` instead of `RollingUpdate` , while it's not best practice this avoids having 2 jenkins pods at the same time as this setup is done locally so resources are limited, under normal circumstances however the strategy part should be removed from Deployemnt as `RollingUpdate` is used by default.
 
 
