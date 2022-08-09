@@ -12,6 +12,7 @@ resources:
 - namespace.yaml
 - service.yaml
 - service-account.yaml
+- service-account-secret.yaml
 
 replicas:
 - name: jenkins
