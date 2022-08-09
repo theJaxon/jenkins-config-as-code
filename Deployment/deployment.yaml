@@ -14,7 +14,7 @@ spec:
           name: configuration-as-code
       containers:
       - name: jenkins
-        image: jenkins-local
+        image: localhost/jenkins-local
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: configuration-as-code
