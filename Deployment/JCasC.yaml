@@ -17,7 +17,7 @@ jenkins:
       containerCapStr: "10"
       jenkinsUrl: "http://jenkins:8080"
       name: "kubernetes"
-      serverUrl: "https://192.168.100.10:6443"
+      serverUrl: "https://192.168.100.11:6443"
       skipTlsVerify: true
       templates:
       - containers:
