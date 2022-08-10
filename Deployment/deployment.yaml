@@ -16,6 +16,10 @@ spec:
       - name: jenkins
         image: localhost/jenkins-local
         imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
         volumeMounts:
         - name: configuration-as-code
           mountPath: /var/jenkins_home/casc_configs/
