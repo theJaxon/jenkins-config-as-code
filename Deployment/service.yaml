@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: jenkins
 spec:
+  clusterIP: None
   ports:
   - name: http
     port: 8080
@@ -11,4 +12,3 @@ spec:
   - name: agent 
     port: 50000
     protocol: TCP
-  type: NodePort
