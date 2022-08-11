@@ -8,11 +8,12 @@ commonAnnotations:
   dockerhub_url: https://hub.docker.com/r/jenkins/jenkins
 resources:
 - cluster-role-binding.yaml
-- deployment.yaml
 - namespace.yaml
+- statefulset.yaml
 - service.yaml
 - service-account.yaml
 - service-account-secret.yaml
+- ingress.yaml
 
 replicas:
 - name: jenkins
