@@ -76,7 +76,7 @@ podTemplate(containers: [
 
         stage('Image Build'){
           container('buildah'){
-            # https://github.com/quarkusio/quarkus-quickstarts/tree/main/getting-started
+            // https://github.com/quarkusio/quarkus-quickstarts/tree/main/getting-started
             dir("getting-started"){
               sh"""
               container=\$(buildah from --name "quarkus-container" quay.io/quarkus/quarkus-distroless-image:1.0)
@@ -84,7 +84,7 @@ podTemplate(containers: [
               buildah copy \$container target/quarkus-app/*.jar /deployments/
               buildah copy \$container target/quarkus-app/app/ /deployments/app/
               buildah copy \$container target/quarkus-app/quarkus/ /deployments/quarkus/
-              buildah config --entrypoint "java -jar ./target/quarkus-app/quarkus-run.jar -Dquarkus.http.host=0.0.0.0" \$container
+              buildah config --entrypoint "java -jar ./deployments/quarkus-run.jar -Dquarkus.http.host=0.0.0.0" \$container
               """
             }
           }
