@@ -85,6 +85,10 @@ podTemplate(containers: [
               buildah copy \$container target/quarkus-app/app/ /deployments/app/
               buildah copy \$container target/quarkus-app/quarkus/ /deployments/quarkus/
               buildah config --entrypoint "java -jar /deployments/quarkus-run.jar -Dquarkus.http.host=0.0.0.0" \$container
+              buildah commit \$container 723178642448.dkr.ecr.us-east-1.amazonaws.com/quarkus:latest
+              buildah images
+              buildah login -u AWS -p ${LOGIN_TOKEN} 723178642448.dkr.ecr.us-east-1.amazonaws.com
+              buildah push 723178642448.dkr.ecr.us-east-1.amazonaws.com/quarkus:latest
               """
             }
           }
