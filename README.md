@@ -55,3 +55,40 @@ kustomize build Manifests | kubectl apply -f -
 - The connection between dynamic pods and jenkins is handled via [`jnlp-slave`](https://hub.docker.com/r/jenkinsci/jnlp-slave/)
 - For this a Pod template is created where the container name is **jnlp**, when the name changed it caused errors so it's kept as jnlp and the Pod template name is also **jnlp**
 - The template is pre-configured via jcasc
+
+---
+
+#### Sample Pipeline that relies on Kubernetes Plugin
+```yaml
+podTemplate(containers: [
+    containerTemplate(name: 'buildah', image: 'quay.io/buildah/stable', command: 'sleep', args: '99d', privileged: true),
+    containerTemplate(name: 'maven', image: 'maven:3.8.6-jdk-11', command: 'sleep', args: '99d')]
+    ) {
+   node(POD_LABEL) {
+     stage('Compile') {
+       container('maven') {
+         git url: 'https://github.com/quarkusio/quarkus-quickstarts.git', branch: 'main'
+           dir("getting-started"){
+             sh "mvn package"
+            }
+          }
+        }
+
+        stage('Image Build'){
+          container('buildah'){
+            # https://github.com/quarkusio/quarkus-quickstarts/tree/main/getting-started
+            dir("getting-started"){
+              sh"""
+              container=\$(buildah from --name "quarkus-container" quay.io/quarkus/quarkus-distroless-image:1.0)
+              buildah copy \$container target/quarkus-app/lib/ /deployments/lib/
+              buildah copy \$container target/quarkus-app/*.jar /deployments/
+              buildah copy \$container target/quarkus-app/app/ /deployments/app/
+              buildah copy \$container target/quarkus-app/quarkus/ /deployments/quarkus/
+              buildah config --entrypoint "java -jar ./target/quarkus-app/quarkus-run.jar -Dquarkus.http.host=0.0.0.0" \$container
+              """
+            }
+          }
+        }
+   }
+}
+```
