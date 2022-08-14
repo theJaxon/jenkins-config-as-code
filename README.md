@@ -10,6 +10,7 @@
 - [Using the project](#using-the-project)
   - [Integration with Kubernetes](#integration-with-kubernetes)
   - [Jenkins Kubernetes cloud configuration](#jenkins-kubernetes-cloud-configuration)
+  - [Sample Pipeline that relies on Kubernetes Plugin](#sample-pipeline-that-relies-on-kubernetes-plugin)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
