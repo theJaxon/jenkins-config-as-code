@@ -38,6 +38,7 @@ spec:
             -XX:G1NewSizePercent=20
             -XX:G1SummarizeRSetStatsPeriod=1
             -XX:+AlwaysPreTouch
+            -Djenkins.install.runSetupWizard=false
         - name: CASC_JENKINS_CONFIG 
           value: /var/jenkins_home/casc_configs/JCasC.yaml
         resources:
