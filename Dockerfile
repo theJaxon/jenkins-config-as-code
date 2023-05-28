@@ -13,7 +13,7 @@ gradle \
 kubernetes \
 ldap \
 matrix-auth \
- mailer:448.v5b_97805e3767 \
+mailer \
 monitoring \
 pam-auth \
 pipeline-aws \
