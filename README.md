@@ -21,6 +21,8 @@ The purpose is to locally spin up a pre-configured Jenkins instance that uses [`
 - Instructions below are for building on [Kontainer8](https://github.com/theJaxon/Kontainer8) Worker node
 
 ```bash
+vagrant ssh worker
+
 git clone https://github.com/theJaxon/jenkins-config-as-code.git
 
 cd jenkins-config-as-code

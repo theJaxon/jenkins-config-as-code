@@ -1,25 +1,25 @@
 FROM docker.io/jenkins/jenkins:lts-jdk11
 RUN jenkins-plugin-cli --plugins \
 antisamy-markup-formatter \
-ant:475.vf34069fef73c \
-build-timeout:1.21 \
+ant \
+build-timeout \
 configuration-as-code \
-credentials-binding:523.vd859a_4b_122e6 \
-cloudbees-folder \ 
+credentials-binding \
+cloudbees-folder \
 git \
-github-branch-source:1677.v731f745ea_0cf \
+github-branch-source \
 gitea \
-gradle:1.39.4 \
+gradle \
 kubernetes \
 ldap \
-matrix-auth:3.1.5 \
-mailer:438.v02c7f0a_12fa_4 \
+matrix-auth \
+mailer \
 monitoring \
-pam-auth:1.10 \
+pam-auth \
 pipeline-aws \
-pipeline-github-lib:38.v445716ea_edda_ \
-pipeline-stage-view:2.24 \
+pipeline-github-lib \
+pipeline-stage-view \
 timestamper \
-workflow-aggregator \ 
+workflow-aggregator \
 workflow-multibranch \
-ws-cleanup:0.42
+ws-cleanup
