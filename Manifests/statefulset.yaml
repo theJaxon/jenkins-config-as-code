@@ -48,7 +48,6 @@ spec:
           limits:
             memory: "2Gi"
             cpu: '1'
-
   volumeClaimTemplates:
   - metadata:
       name: jenkins-storage
