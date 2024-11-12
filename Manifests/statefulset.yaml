@@ -48,9 +48,6 @@ spec:
           limits:
             memory: "2Gi"
             cpu: '1'
-      dnsConfig:
-        nameservers:
-          - 8.8.8.8
   volumeClaimTemplates:
   - metadata:
       name: jenkins-storage
